@@ -1,0 +1,19 @@
+---
+import '../styles/header.css'
+
+const pathname = Astro.url.pathname;
+---
+
+<header>
+    <div class="LogoName">
+        <img src="" alt="">
+        <h2>Carlos Díez</h2>
+    </div>
+
+    <nav>
+        <a class={pathname === '/abtme' ? 'active' : ''} href="./abtme">About Me</a>
+        <a class={pathname === '/projects' ? 'active' : ''} href="./projects">Projects</a>
+        <a class={pathname === '/contact' ? 'active' : ''} href="./contact">Contact</a>
+
+    </nav>
+</header>
