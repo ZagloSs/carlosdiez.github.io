@@ -1,0 +1,29 @@
+.card{
+    width: 350px;
+    height: fit-content;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.img{
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+}
+.title-time{
+    width:350px;
+    display:flex;
+    /* outline: 1px solid purple; */
+    justify-content: space-between;
+}
+
+.card img{
+    width: 350px;
+    transition: 0.3s;
+
+}
+
+.card:hover img {
+    transform: scale(1.2); /* Zoom de 5% */
+}

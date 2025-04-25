@@ -1,0 +1,23 @@
+---
+import "../styles/card.css"
+const {link} = Astro.props
+const {img} = Astro.props
+const {title} = Astro.props
+const {timeSpent} = Astro.props
+const {bio} = Astro.props
+---
+
+<a href={link}>
+    <div class="card">
+        <div class="img">
+            <img src={img} alt="#">
+        </div>
+        
+    
+        <div class="title-time">
+            <h1>{title}</h1>
+            <p>{timeSpent}</p>
+        </div>
+        <p>{bio}</p>
+    </div>
+</a>

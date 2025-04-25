@@ -1,0 +1,28 @@
+---
+import DefLayout from "../layouts/defLayout.astro" 
+import ProjectCard from "../components/projectCard.astro"
+import { proyectos } from "../data/projects"
+
+import "../styles/projects.css"
+
+---
+
+<DefLayout title = "Projects">
+
+    <div class="page">
+        <div class="project-container">
+            {
+                proyectos.map((proyecto)=> (
+                    <ProjectCard 
+                    link={proyecto.link} 
+                    img = {proyecto.img} 
+                    title = {proyecto.title} 
+                    timeSpent = {proyecto.timeSpent}
+                    bio = {proyecto.bio}/>
+                ))
+            }
+        </div>
+    </div>
+
+</DefLayout>
+

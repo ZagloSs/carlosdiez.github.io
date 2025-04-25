@@ -1,0 +1,16 @@
+.page{
+    margin-top: 50px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.project-container{
+    width: 80%;
+    /* outline: 1px solid peru; */
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+
+}

@@ -7,39 +7,36 @@ header{
     
 }
 
-
-
-
 .LogoName{
     display: flex;
     align-items: center;
-    gap: 20px;
+
+
 }
 
 .LogoName img{
-    width: 50px;
-    height: 50px;
-    outline: 2px solid black;
+    width: 80px;
+    height: 80px;
 }
 nav {
     display: flex;
     gap:25px
 }
 header nav a{
-    color: black;
+    color: #906d36;
     text-decoration: none;
     background-color: white;
-    outline: 2px solid black;
+    outline: 3px solid #906d36;
     padding: 10px;
     transition: 0.3s;
 }
 
 header nav a:hover{
     color: white;
-    background-color: black ;
+    background-color: #906d36 ;
 }
 
 .active{
     color: white;
-    background-color: black ;
+    background-color: #906d36 ;
 }
