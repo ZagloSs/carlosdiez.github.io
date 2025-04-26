@@ -4,10 +4,12 @@ header{
     display: flex;
     justify-content: space-around;
     align-items: center;
+
     
 }
 
 .LogoName{
+    position: relative;
     display: flex;
     align-items: center;
 
@@ -17,26 +19,42 @@ header{
 .LogoName img{
     width: 80px;
     height: 80px;
+    /* background-color: #9D6D2E; */
 }
+
+.back{
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    background-color: #9D6D2E;
+    transition: 0.3s;
+}
+
+.LogoName:hover .back{
+    width: 110%;
+}
+
 nav {
     display: flex;
     gap:25px
 }
 header nav a{
-    color: #906d36;
+    color: #9D6D2E;
     text-decoration: none;
     background-color: white;
-    outline: 3px solid #906d36;
+    outline: 3px solid #9D6D2E;
     padding: 10px;
     transition: 0.3s;
 }
 
 header nav a:hover{
     color: white;
-    background-color: #906d36 ;
+    background-color: #9D6D2E;
 }
 
 .active{
     color: white;
-    background-color: #906d36 ;
+    background-color: #9D6D2E;
 }
+

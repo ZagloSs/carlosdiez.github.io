@@ -5,10 +5,11 @@ const pathname = Astro.url.pathname;
 ---
 
 <header>
-    <div class="LogoName">
+    <a class="LogoName" href= "./" >
         <img src= {logo.src} alt="">
         <h1>Carlos Díez</h1>
-    </div>
+        <div class="back"></div>
+    </a>
 
     <nav>
         <a class={pathname === '/abtme' ? 'active' : ''} href="./abtme">About Me</a>

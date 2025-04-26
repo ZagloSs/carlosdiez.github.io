@@ -1,14 +1,15 @@
 ---
-import DefLayout from "../layouts/defLayout.astro" 
+import ProyectLayout from "../layouts/LayoutForProject.astro" 
 import ProjectCard from "../components/projectCard.astro"
 import { proyectos } from "../data/projects"
+import Header from '../components/Header.astro';
 
 import "../styles/projects.css"
 
 ---
 
-<DefLayout title = "Projects">
-
+<ProyectLayout title = "Projects">
+    <Header/>
     <div class="page">
         <div class="project-container">
             {
@@ -18,11 +19,13 @@ import "../styles/projects.css"
                     img = {proyecto.img} 
                     title = {proyecto.title} 
                     timeSpent = {proyecto.timeSpent}
-                    bio = {proyecto.bio}/>
+                    bio = {proyecto.bio}
+                    tsName = {proyecto.tsName}
+                   />
                 ))
             }
         </div>
     </div>
 
-</DefLayout>
+</ProyectLayout>
 

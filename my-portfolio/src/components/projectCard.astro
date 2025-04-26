@@ -5,12 +5,13 @@ const {img} = Astro.props
 const {title} = Astro.props
 const {timeSpent} = Astro.props
 const {bio} = Astro.props
+const {tsName} = Astro.props
 ---
 
 <a href={link}>
     <div class="card">
         <div class="img">
-            <img src={img} alt="#">
+            <img src={img} alt="#" transition:name={tsName}>
         </div>
         
     

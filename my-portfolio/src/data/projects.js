@@ -1,25 +1,20 @@
 export const proyectos = [
     {
-        link: "#",
+        link: "./projects/mockup",
         img:"src/imgs/mockup.png",
         title: "Mockup",
         timeSpent: "3 h",
-        bio: "biologica"
+        bio: "biologica",
+        tsName: "Mockup"
     },
 
     {
         link: "#",
-        img:"src/imgs/mockup.png",
-        title: "Mockup2",
-        timeSpent: "3 h",
-        bio: "biologica"
-    },
-
-    {
-        link: "#",
-        img:"src/imgs/mockup.png",
-        title: "Mockup3",
-        timeSpent: "3 h",
-        bio: "biologica"
+        img:"src/imgs/fpquestProject.png",
+        title: "FpQuest",
+        timeSpent: "504 h",
+        bio: "Small game made using unity engine. Based in The Binding of Isaac"
     }
+
+    
 ];
