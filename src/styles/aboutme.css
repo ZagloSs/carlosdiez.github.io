@@ -1,0 +1,32 @@
+main {
+  padding: 20px;
+  min-height: calc(100vh - 150px); /* Adjust for header height */
+  background-color: #f9f9f9;
+}
+
+/* AOS animations CSS */
+[data-aos] {
+  visibility: hidden;
+}
+
+[data-aos].aos-animate {
+  visibility: visible;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  main {
+    padding: 15px;
+    padding-top: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  main {
+    padding: 10px;
+    padding-top: 20px;
+  }
+}
+
+/* Add custom AOS dependency */
+@import "https://unpkg.com/aos@next/dist/aos.css"; 

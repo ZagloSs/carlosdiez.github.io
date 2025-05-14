@@ -4,16 +4,18 @@ header{
     display: flex;
     justify-content: space-around;
     align-items: center;
-
-    
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f9f9f9;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .LogoName{
     position: relative;
     display: flex;
     align-items: center;
-
-
 }
 
 .LogoName img{
@@ -56,5 +58,62 @@ header nav a:hover{
 .active{
     color: white;
     background-color: #9D6D2E;
+}
+
+/* Estilos responsivos para el header */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 15px 0;
+        height: auto;
+        min-height: 180px;
+    }
+    
+    .LogoName {
+        margin-bottom: 10px;
+    }
+    
+    .LogoName h1 {
+        font-size: 1.8rem;
+    }
+    
+    .LogoName img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    nav {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    header nav a {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        min-height: 200px;
+        padding: 10px 0;
+    }
+    
+    .LogoName h1 {
+        font-size: 1.5rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    header nav a {
+        width: 150px;
+        text-align: center;
+    }
 }
 

@@ -12,5 +12,15 @@
     gap: 50px;
     flex-wrap: wrap;
     margin-bottom: 200px;
+}
 
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .page {
+        margin-top: 20px;
+    }
+    .project-container {
+        width: 90%;
+        gap: 30px;
+    }
 }

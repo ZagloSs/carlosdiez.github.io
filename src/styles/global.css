@@ -12,7 +12,8 @@
 }
 
 body{
-    height: 100vh
+    height: 100vh;
+    padding-top: 150px; /* Espacio para el header fijo */
 }
 h1{
     font-family: 'Square';
@@ -25,4 +26,17 @@ h2,h3,a,p{
 a{
     color: black;
     text-decoration: none;
+}
+
+/* Media queries para ajustar el padding con el header responsivo */
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 180px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding-top: 200px;
+    }
 }

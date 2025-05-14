@@ -1,15 +1,12 @@
 ---
-import ProyectLayout from "../layouts/LayoutForProject.astro" 
+import DefLayout from "../layouts/defLayout.astro" 
 import ProjectCard from "../components/projectCard.astro"
 import { proyectos } from "../data/projects"
-import Header from '../components/Header.astro';
-
 import "../styles/projects.css"
 
 ---
 
-<ProyectLayout title = "Projects">
-    <Header/>
+<DefLayout title = "Projects">
     <div class="page">
         <div class="project-container">
             {
@@ -26,6 +23,5 @@ import "../styles/projects.css"
             }
         </div>
     </div>
-
-</ProyectLayout>
+</DefLayout>
 

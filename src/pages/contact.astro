@@ -1,9 +1,77 @@
 ---
-import DefLayout from "../layouts/defLayout.astro" 
+import DefLayout from "../layouts/defLayout.astro"
+import "../styles/contact.css"
 ---
 
 <DefLayout title = "Contact">
-
-	
+	<main class="contact-container">
+		<div class="contact-info" data-aos="fade-right">
+			<h2>Contacto</h2>
+			<p class="contact-description">
+				Si tienes alguna pregunta o propuesta, no dudes en contactarme. 
+				Estaré encantado de escucharte y responderé lo antes posible.
+			</p>
+			
+			<div class="direct-contact">
+				<h3>Contacto Directo</h3>
+				<div class="email-container">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9D6D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+						<polyline points="22,6 12,13 2,6"></polyline>
+					</svg>
+					<a href="mailto:cdiezmendez@gmail.com">cdiezmendez@gmail.com</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-container" data-aos="fade-left">
+			<h3>Envíame un mensaje</h3>
+			<form id="contact-form">
+				<div class="form-group">
+					<label for="name">Nombre</label>
+					<input type="text" id="name" name="name" required>
+				</div>
+				
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" required>
+				</div>
+				
+				<div class="form-group">
+					<label for="message">Mensaje</label>
+					<textarea id="message" name="message" rows="5" required></textarea>
+				</div>
+				
+				<button type="submit" class="submit-btn">
+					Enviar Mensaje
+				</button>
+			</form>
+		</div>
+	</main>
 </DefLayout>
+
+<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', () => {
+		// Inicializar AOS
+		AOS.init({
+			duration: 800,
+			easing: 'ease-in-out',
+			once: false,
+		});
+		
+		// Manejar envío del formulario
+		const form = document.getElementById('contact-form');
+		
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			
+			// Aquí se podría implementar el envío del formulario a un servicio backend
+			// Por ahora, solo mostraremos un mensaje de éxito
+			
+			alert('¡Gracias por tu mensaje! Te responderé lo antes posible.');
+			form.reset();
+		});
+	});
+</script>
 

@@ -1,0 +1,103 @@
+.intro-letter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.letter-container {
+  width: 70%;
+  max-width: 800px;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(157, 109, 46, 0.1);
+  position: relative;
+  border: 1px solid #e5e5e5;
+  overflow: hidden;
+}
+
+.letter-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background-color: #9D6D2E;
+}
+
+.letter-container h2 {
+  color: #9D6D2E;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  font-family: 'Square';
+}
+
+.letter-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.letter-content p {
+  margin-bottom: 15px;
+}
+
+.signature {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.signature p {
+  font-family: 'Square';
+  font-size: 1.6rem;
+  color: #9D6D2E;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .intro-letter {
+    padding: 30px 0;
+  }
+  
+  .letter-container {
+    width: 85%;
+    padding: 30px;
+  }
+  
+  .letter-container h2 {
+    font-size: 1.8rem;
+  }
+  
+  .letter-content {
+    font-size: 1rem;
+  }
+  
+  .signature p {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .intro-letter {
+    padding: 20px 0;
+  }
+  
+  .letter-container {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .letter-container h2 {
+    font-size: 1.6rem;
+  }
+  
+  .letter-content {
+    font-size: 0.95rem;
+  }
+  
+  .signature p {
+    font-size: 1.2rem;
+  }
+} 

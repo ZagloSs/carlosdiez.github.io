@@ -1,8 +1,24 @@
 ---
-import DefLayout from "../layouts/defLayout.astro" 
+import DefLayout from "../layouts/defLayout.astro"
+import IntroLetter from "../components/IntroLetter.astro"
+import WorkTimeline from "../components/WorkTimeline.astro"
+import "../styles/aboutme.css"
 ---
 
 <DefLayout title = "About Me">
-
-	
+	<main>
+		<IntroLetter />
+		<WorkTimeline />
+	</main>
 </DefLayout>
+
+<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', () => {
+		AOS.init({
+			duration: 800,
+			easing: 'ease-in-out',
+			once: false,
+		});
+	});
+</script>
