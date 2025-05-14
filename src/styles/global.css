@@ -4,17 +4,35 @@
     src: url(/fonts/Square.ttf);
 }
 
-
 *{
     padding: 0px;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
-    height: 100vh;
-    padding-top: 150px; /* Espacio para el header fijo */
+html {
+    height: 100%;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 150px; /* Espacio para el header fijo */
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el contenedor principal para empujar el footer al final */
+main {
+    flex: 1 0 auto;
+    width: 100%;
+    min-height: calc(100vh - 250px); /* Altura mínima para empujar el footer hacia abajo */
+    padding-bottom: 50px; /* Espacio adicional antes del footer */
+    position: relative;
+    z-index: 1; /* Asegura que el contenido principal esté por encima del footer */
+}
+
+/* Estilos para tipografía */
 h1{
     font-family: 'Square';
     color: #9D6D2E;
@@ -26,6 +44,13 @@ h2,h3,a,p{
 a{
     color: black;
     text-decoration: none;
+}
+
+/* Estilos específicos para el footer para asegurar que esté al final */
+footer {
+    width: 100%;
+    z-index: 0;
+    margin-top: auto; /* Esto empuja el footer al final cuando hay poco contenido */
 }
 
 /* Media queries para ajustar el padding con el header responsivo */
