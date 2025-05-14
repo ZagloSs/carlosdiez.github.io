@@ -67,7 +67,7 @@ import "../styles/contact.css"
 		// 2. Crea un servicio de correo (Gmail, Outlook, etc.)
 		// 3. Crea una plantilla de correo
 		// 4. Reemplaza YOUR_PUBLIC_KEY, YOUR_SERVICE_ID y YOUR_TEMPLATE_ID con tus credenciales
-		emailjs.init("YOUR_PUBLIC_KEY");
+		emailjs.init("LO_GcqIlgKd5aVmSX");
 		
 		// Manejar envío del formulario
 		const form = document.getElementById('contact-form');
@@ -86,17 +86,25 @@ import "../styles/contact.css"
 			const email = form.elements['email'].value;
 			const message = form.elements['message'].value;
 			
+			// Crear un mensaje formateado que incluya el nombre y email del remitente
+			const formattedMessage = `
+Nombre: ${name}
+Email: ${email}
+Mensaje: 
+${message}
+`;
+			
 			// Preparar los parámetros para EmailJS
 			const templateParams = {
 				to_email: "cdiezmendez@gmail.com",
 				from_name: name,
 				from_email: email,
-				message: message
+				message: formattedMessage
 			};
 			
 			// Enviar el email usando EmailJS
 			// Reemplaza "YOUR_SERVICE_ID" y "YOUR_TEMPLATE_ID" con tus IDs de EmailJS
-			emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+			emailjs.send("service_sk4mzf8", "template_0p0kgj5", templateParams)
 				.then((response) => {
 					console.log("Email enviado con éxito:", response);
 					alert('¡Gracias por tu mensaje! Te responderé lo antes posible.');
