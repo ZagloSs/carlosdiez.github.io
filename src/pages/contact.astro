@@ -42,7 +42,7 @@ import "../styles/contact.css"
 					<textarea id="message" name="message" rows="5" required></textarea>
 				</div>
 				
-				<button type="submit" class="submit-btn">
+				<button type="submit" class="submit-btn" id="submit-btn">
 					Enviar Mensaje
 				</button>
 			</form>
@@ -51,6 +51,7 @@ import "../styles/contact.css"
 </DefLayout>
 
 <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script is:inline>
 	document.addEventListener('DOMContentLoaded', () => {
 		// Inicializar AOS
@@ -60,17 +61,56 @@ import "../styles/contact.css"
 			once: false,
 		});
 		
+		// Inicializar EmailJS
+		// IMPORTANTE: Para que el formulario funcione correctamente:
+		// 1. Regístrate en https://www.emailjs.com/
+		// 2. Crea un servicio de correo (Gmail, Outlook, etc.)
+		// 3. Crea una plantilla de correo
+		// 4. Reemplaza YOUR_PUBLIC_KEY, YOUR_SERVICE_ID y YOUR_TEMPLATE_ID con tus credenciales
+		emailjs.init("YOUR_PUBLIC_KEY");
+		
 		// Manejar envío del formulario
 		const form = document.getElementById('contact-form');
+		const submitBtn = document.getElementById('submit-btn');
 		
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
 			
-			// Aquí se podría implementar el envío del formulario a un servicio backend
-			// Por ahora, solo mostraremos un mensaje de éxito
+			// Cambiar el texto del botón y deshabilitarlo durante el envío
+			const originalBtnText = submitBtn.textContent;
+			submitBtn.textContent = "Enviando...";
+			submitBtn.disabled = true;
 			
-			alert('¡Gracias por tu mensaje! Te responderé lo antes posible.');
-			form.reset();
+			// Obtener los datos del formulario
+			const name = form.elements['name'].value;
+			const email = form.elements['email'].value;
+			const message = form.elements['message'].value;
+			
+			// Preparar los parámetros para EmailJS
+			const templateParams = {
+				to_email: "cdiezmendez@gmail.com",
+				from_name: name,
+				from_email: email,
+				message: message
+			};
+			
+			// Enviar el email usando EmailJS
+			// Reemplaza "YOUR_SERVICE_ID" y "YOUR_TEMPLATE_ID" con tus IDs de EmailJS
+			emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+				.then((response) => {
+					console.log("Email enviado con éxito:", response);
+					alert('¡Gracias por tu mensaje! Te responderé lo antes posible.');
+					form.reset();
+				})
+				.catch((error) => {
+					console.error("Error al enviar el email:", error);
+					alert('Ha ocurrido un error al enviar tu mensaje. Por favor, intenta de nuevo o contáctame directamente por email.');
+				})
+				.finally(() => {
+					// Restaurar el estado original del botón
+					submitBtn.textContent = originalBtnText;
+					submitBtn.disabled = false;
+				});
 		});
 	});
 </script>
