@@ -1,13 +1,98 @@
 ---
-import ProyectLayout from "../../layouts/LayoutForProject.astro" 
-
+import ProyectLayout from "../../layouts/LayoutForProject.astro"
 ---
 
-<ProyectLayout title = "FpQuest">
+<ProyectLayout title="FpQuest - Proyecto">
+    <div class="project-header">
+        <h1 class="project-title" data-aos="fade-up">FpQuest</h1>
+    </div>
     
-    <img src="../src/imgs/fpquestProject.png" alt="" style="width: 800px;" transition:name="FpQuest">
+    <div class="project-image-container" data-aos="fade-up" data-aos-delay="200">
+        <img src="/src/imgs/fpquestProject.png" alt="FpQuest Project" transition:name="FpQuest">
+    </div>
     
-
-
-
+    <div class="project-info-section" data-aos="fade-up">
+        <h2 class="section-title">Descripción del Proyecto</h2>
+        <div class="project-description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.</p>
+            <p>Phasellus ac dui condimentum, facilisis lorem non, viverra magna. Donec eget tellus odio. Donec sollicitudin, velit nec elementum tempus, nulla urna venenatis metus, vel sagittis est ex sed urna. Donec dignissim, elit et fringilla finibus, lectus diam convallis erat, ac molestie lorem neque vitae neque.</p>
+        </div>
+        
+        <h3 class="section-title">Tecnologías Utilizadas</h3>
+        <div class="tech-stack" data-aos="fade-up" data-aos-delay="100">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Express</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">CSS3</span>
+        </div>
+    </div>
+    
+    <div class="project-features" data-aos="fade-up">
+        <h2 class="section-title">Características Principales</h2>
+        <div class="features-list">
+            <div class="feature-item" data-aos="zoom-in" data-aos-delay="100">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9D6D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                </div>
+                <h3>Característica 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod, nisl vel ultricies lacinia.</p>
+            </div>
+            
+            <div class="feature-item" data-aos="zoom-in" data-aos-delay="200">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9D6D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                </div>
+                <h3>Característica 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod, nisl vel ultricies lacinia.</p>
+            </div>
+            
+            <div class="feature-item" data-aos="zoom-in" data-aos-delay="300">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9D6D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                        <line x1="6" y1="1" x2="6" y2="4"></line>
+                        <line x1="10" y1="1" x2="10" y2="4"></line>
+                        <line x1="14" y1="1" x2="14" y2="4"></line>
+                    </svg>
+                </div>
+                <h3>Característica 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod, nisl vel ultricies lacinia.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="project-gallery" data-aos="fade-up">
+        <h2 class="section-title">Galería</h2>
+        <div class="project-gallery">
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                <img src="/src/imgs/fpquestProject.png" alt="FpQuest Screenshot 1">
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                <img src="/src/imgs/fpquestProject.png" alt="FpQuest Screenshot 2">
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                <img src="/src/imgs/fpquestProject.png" alt="FpQuest Screenshot 3">
+            </div>
+        </div>
+    </div>
+    
+    <div class="project-conclusion" data-aos="fade-up">
+        <h2 class="section-title">Reflexiones y Aprendizajes</h2>
+        <div class="project-description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.</p>
+            <p>Phasellus ac dui condimentum, facilisis lorem non, viverra magna. Donec eget tellus odio. Donec sollicitudin, velit nec elementum tempus, nulla urna venenatis metus, vel sagittis est ex sed urna.</p>
+        </div>
+    </div>
+    
+    <div class="cta-section" data-aos="fade-up">
+        <a href="https://github.com/ZagloSs/FPQuest" target="_blank" class="primary-btn">Ver Repositorio</a>
+    </div>
 </ProyectLayout>
