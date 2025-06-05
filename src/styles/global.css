@@ -4,6 +4,13 @@
     src: url(/fonts/Square.ttf);
 }
 
+:root {
+    --main-orange: #9D6D2E;
+    --light-bg: #f9f9f9;
+    --main-font: "Montserrat", sans-serif;
+    --heading-font: 'Square', sans-serif;
+}
+
 *{
     padding: 0px;
     margin: 0;
@@ -19,7 +26,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     padding-top: 150px; /* Espacio para el header fijo */
-    background-color: #f9f9f9;
+    background-color: var(--light-bg);
 }
 
 /* Estilo para el contenedor principal para empujar el footer al final */
@@ -34,11 +41,11 @@ main {
 
 /* Estilos para tipografía */
 h1{
-    font-family: 'Square';
-    color: #9D6D2E;
+    font-family: var(--heading-font);
+    color: var(--main-orange);
 }
 h2,h3,a,p{
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--main-font);
 }
 
 a{

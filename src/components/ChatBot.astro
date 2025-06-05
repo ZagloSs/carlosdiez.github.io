@@ -1,0 +1,222 @@
+---
+// ChatBot component for the website
+---
+
+<div class="chat-bot-container">
+  <button id="chat-bot-button" aria-label="Abrir chat" title="Abrir chat">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2c5.5 0 10 3.8 10 8.5 0 1.7-.7 3.3-1.8 4.6-1.4 1.6-3.5 2.7-5.7 3.2-.8.2-1.6.3-2.5.3-1 0-2-.1-3-.4-.2 0-.6.1-.7.1-.4.2-.8.4-1.1.6-.6.4-1.2.8-1.9 1.1-.2.1-.4 0-.5-.2v-.1c-.1-.8 0-1.7.3-2.4.1-.3.2-.6.4-.8L5 16c-1.9-1.3-3-3.2-3-5.5C2 5.8 6.5 2 12 2z"/>
+      <circle cx="12" cy="10" r="1"/>
+      <circle cx="16" cy="10" r="1"/>
+      <circle cx="8" cy="10" r="1"/>
+    </svg>
+  </button>
+  
+  <div id="chat-box" class="chat-box">
+    <div class="chat-header">
+      <h3>Chat</h3>
+      <button id="close-chat" class="close-button" aria-label="Cerrar chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="chat-messages" id="chat-messages">
+      <div class="message bot-message">
+        <p>¡Hola! Soy el asistente virtual de Carlos. ¿En qué puedo ayudarte?</p>
+      </div>
+    </div>
+    
+    <div class="chat-input-container">
+      <input 
+        type="text" 
+        id="chat-input" 
+        placeholder="Escribe tu mensaje..." 
+        aria-label="Mensaje"
+      />
+      <button id="send-button" aria-label="Enviar mensaje">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const chatBotButton = document.getElementById('chat-bot-button');
+    const chatBox = document.getElementById('chat-box');
+    const closeChatButton = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const sendButton = document.getElementById('send-button');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    // Historial de la conversación (memoria)
+    let chatHistory = [
+      {
+        role: 'system',
+        content: `Eres un asistente útil y simpático para la web personal de Carlos Díez. Usa el contexto proporcionado para responder preguntas sobre la web. Responde de forma breve, directa y clara, sin extenderte demasiado.`
+      },
+      {
+        role: 'assistant',
+        content: '¡Hola! Soy el asistente virtual de Carlos. ¿En qué puedo ayudarte?'
+      }
+    ];
+    
+    // Función para abrir el chat
+    function openChat() {
+      chatBox.classList.add('open');
+      chatBotButton.setAttribute('aria-expanded', 'true');
+      setTimeout(() => {
+        chatInput.focus();
+      }, 300);
+    }
+    
+    // Función para cerrar el chat
+    function closeChat() {
+      chatBox.classList.remove('open');
+      chatBotButton.setAttribute('aria-expanded', 'false');
+    }
+    
+    // Función para añadir un mensaje del usuario
+    function addUserMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message user-message';
+      messageDiv.innerHTML = `<p>${message}</p>`;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      chatHistory.push({ role: 'user', content: message });
+    }
+    
+    // Función para añadir un mensaje del bot
+    function addBotMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message bot-message';
+      messageDiv.innerHTML = `<p>${message}</p>`;
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      chatHistory.push({ role: 'assistant', content: message });
+    }
+    
+    // Función robusta para extraer el primer bloque JSON completo de la respuesta
+    function extractFirstJson(str) {
+      // Busca el primer { ... } y su cierre usando contador de llaves
+      const jsonStart = str.indexOf('{');
+      if (jsonStart === -1) return null;
+      let depth = 0;
+      let end = -1;
+      for (let i = jsonStart; i < str.length; i++) {
+        if (str[i] === '{') depth++;
+        if (str[i] === '}') depth--;
+        if (depth === 0) {
+          end = i + 1;
+          break;
+        }
+      }
+      if (end === -1) return null;
+      let jsonStr = str.slice(jsonStart, end).trim();
+      // Si está envuelto en paréntesis, quítalos
+      if (jsonStr.startsWith('(') && jsonStr.endsWith(')')) {
+        jsonStr = jsonStr.slice(1, -1).trim();
+      }
+      try {
+        const obj = JSON.parse(jsonStr);
+        if (obj && obj.action === 'create_event' && obj.data) {
+          return obj;
+        }
+      } catch (e) { /* no válido */ }
+      return null;
+    }
+    
+    // Función para manejar el envío de mensaje
+    function handleSendMessage() {
+      const message = chatInput.value.trim();
+      if (message) {
+        addUserMessage(message);
+        chatInput.value = '';
+        addBotMessage('Pensando...');
+        
+        // Elimina el último mensaje del bot ("Pensando...") antes de añadir la respuesta real
+        const tempBotIndex = chatHistory.length - 1;
+        
+        fetch('/api/groq-chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ history: chatHistory })
+        })
+          .then(res => res.json())
+          .then(async data => {
+            // Reemplaza el último mensaje "Pensando..." por la respuesta real o maneja acción especial
+            let botResponse = data.response;
+            console.log('Respuesta bruta del bot:', botResponse);
+            let parsed = null;
+
+            parsed = extractFirstJson(botResponse);
+            if (parsed) {
+              console.log('JSON detectado para crear evento:', parsed);
+              // Llama al endpoint para crear el evento
+              addBotMessage('Creando la cita en el calendario...');
+              try {
+                const eventRes = await fetch('/api/create-event', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(parsed.data)
+                });
+                const eventData = await eventRes.json();
+                if (eventData.success) {
+                  addBotMessage(`¡Cita creada con éxito! Puedes verla aquí: <a href="${eventData.htmlLink}" target="_blank">Ver en Google Calendar</a>`);
+                } else {
+                  addBotMessage('No se pudo crear la cita. Motivo: ' + (eventData.error || 'Error desconocido'));
+                  console.error('Error al crear cita:', eventData);
+                }
+              } catch (err) {
+                addBotMessage('Ocurrió un error al crear la cita.');
+                console.error('Error al llamar a /api/create-event:', err);
+              }
+              // Elimina el mensaje "Pensando..."
+              const lastBotMsg = chatMessages.querySelector('.bot-message:last-child p');
+              if (lastBotMsg) lastBotMsg.textContent = '';
+              chatHistory[tempBotIndex].content = '[Cita gestionada]';
+            } else {
+              // Respuesta normal de la IA
+              const lastBotMsg = chatMessages.querySelector('.bot-message:last-child p');
+              if (lastBotMsg) lastBotMsg.textContent = botResponse;
+              chatHistory[tempBotIndex].content = botResponse;
+            }
+          })
+          .catch(() => {
+            const lastBotMsg = chatMessages.querySelector('.bot-message:last-child p');
+            if (lastBotMsg) lastBotMsg.textContent = 'Error al conectar con la IA.';
+            chatHistory[tempBotIndex].content = 'Error al conectar con la IA.';
+          });
+      }
+    }
+    
+    // Event listeners
+    chatBotButton.addEventListener('click', openChat);
+    closeChatButton.addEventListener('click', closeChat);
+    
+    sendButton.addEventListener('click', handleSendMessage);
+    
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleSendMessage();
+      }
+    });
+    
+    // Cerrar el chat si se hace clic fuera de él
+    document.addEventListener('click', (e) => {
+      if (
+        chatBox.classList.contains('open') && 
+        !chatBox.contains(e.target) && 
+        e.target !== chatBotButton
+      ) {
+        closeChat();
+      }
+    });
+  });
+</script> 

@@ -1,0 +1,189 @@
+/* Estilos para el componente ChatBot */
+
+.chat-bot-container {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  font-family: var(--main-font);
+}
+
+/* Botón redondo con icono de bot */
+#chat-bot-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--main-orange);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+#chat-bot-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#chat-bot-button svg {
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+}
+
+/* Estilos para el chatbox */
+.chat-box {
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  width: 320px;
+  max-height: 450px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  transform-origin: bottom right;
+  transition: all 0.3s ease;
+}
+
+.chat-box.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Cabecera del chat */
+.chat-header {
+  background-color: var(--main-orange);
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Contenedor de mensajes */
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 320px;
+  background-color: #f9f9f9;
+}
+
+/* Estilos para los mensajes */
+.message {
+  margin-bottom: 15px;
+  max-width: 85%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  line-height: 1.4;
+  position: relative;
+  clear: both;
+}
+
+.message p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.bot-message {
+  background-color: #e6e6e6;
+  float: left;
+}
+
+.user-message {
+  background-color: var(--main-orange);
+  color: white;
+  float: right;
+}
+
+/* Contenedor de entrada de texto */
+.chat-input-container {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #e0e0e0;
+}
+
+#chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  outline: none;
+  font-family: var(--main-font);
+  font-size: 14px;
+}
+
+#send-button {
+  background-color: transparent;
+  border: none;
+  color: var(--main-orange);
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#send-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .chat-box {
+    width: 90vw;
+    max-width: 320px;
+    right: 0;
+    bottom: 75px;
+  }
+  
+  #chat-bot-button {
+    width: 50px;
+    height: 50px;
+  }
+  
+  #chat-bot-button svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Evitar que el chatbot aparezca en las páginas de proyectos */
+body.project-page .chat-bot-container {
+  display: none;
+} 

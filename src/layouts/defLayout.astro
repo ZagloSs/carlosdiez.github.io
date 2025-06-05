@@ -1,7 +1,9 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ChatBot from '../components/ChatBot.astro';
 import '../styles/global.css' 
+import '../styles/chatbot.css'
 
 const { title } = Astro.props
 ---
@@ -20,5 +22,6 @@ const { title } = Astro.props
 		<Header/>
 		<slot/>
 		<Footer/>
+		<ChatBot />
 	</body>
 </html>

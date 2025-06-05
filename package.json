@@ -10,6 +10,15 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "astro": "^5.7.5"
+    "@langchain/groq": "^0.2.2",
+    "@langchain/openai": "^0.5.12",
+    "astro": "^5.7.5",
+    "dotenv": "^16.5.0",
+    "esm": "^3.2.25",
+    "googleapis": "^149.0.0",
+    "langchain": "^0.3.27"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29"
   }
 }

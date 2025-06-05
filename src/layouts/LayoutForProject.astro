@@ -2,7 +2,7 @@
 import {ClientRouter} from 'astro:transitions';
 import '../styles/global.css';
 import '../styles/projectDetail.css';
-import Footer from '../components/footer.astro';
+import Footer from '../components/Footer.astro';
 
 const { title } = Astro.props;
 ---
@@ -17,7 +17,7 @@ const { title } = Astro.props;
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 		<ClientRouter/>
 	</head>
-	<body>
+	<body class="project-page">
 		<main class="project-detail-container">
 			<a href="/projects" class="back-btn" data-aos="fade-right" data-aos-duration="600">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9D6D2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
