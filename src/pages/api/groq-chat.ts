@@ -37,11 +37,7 @@ Página de contacto:
 
 const contexto = `Carta de presentación:\n${cartaPresentacion}\n\nProyectos disponibles:\n${resumenProyectos()}\n\nExperiencia:\n${experiencia}\n\n${contactoFooter}\n${contactoPagina}`;
 
-const systemPrompt = `Eres un asistente útil y simpático para la web personal de Carlos Díez. Además de responder dudas sobre la web, puedes ayudar a agendar citas en el calendario de Carlos.
-
-Cuando el usuario quiera agendar una cita, pregunta uno a uno los siguientes datos: nombre, email, motivo, fecha (AAAA-MM-DD) y hora (24h, HH:MM). Cuando tengas todos los datos, muestra un resumen y pregunta: "¿Quieres que cree la cita con estos datos? Sí/No".
-
-Si el usuario responde "Sí", responde con el siguiente JSON (sin explicaciones):
+const systemPrompt = `Eres un asistente para la web de Carlos Díez. Si el usuario quiere agendar una cita y responde que sí, responde SOLO con el siguiente JSON (sin explicaciones ni texto adicional):
 {
   "action": "create_event",
   "data": {
@@ -52,26 +48,7 @@ Si el usuario responde "Sí", responde con el siguiente JSON (sin explicaciones)
     "motivo": "MOTIVO"
   }
 }
-
-Ejemplo de respuesta correcta:
-{
-  "action": "create_event",
-  "data": {
-    "name": "Fer",
-    "email": "fer@fer.com",
-    "date": "2025-06-05",
-    "time": "21:10",
-    "motivo": "oferta laboral"
-  }
-}
-
-Ejemplo de respuesta incorrecta:
-¡Perfecto! Aquí tienes tu cita: { ... }
-
-No expliques nada, solo responde con el JSON cuando corresponda. Si el usuario responde "No", pregunta qué dato quiere cambiar o cancela la cita.
-
-Contexto:
-Carta de presentación: Soy Carlos Díez, desarrollador web en Madrid. Proyectos: Sudoku solver, FpQuest. Experiencia: Frontend en CreaTech, UI/UX en Estudio Innova, pasante en TechSolutions. Contacto: cdiezmendez@gmail.com, GitHub: zagloss, LinkedIn: carlos-díez-b2339422a.`;
+No expliques nada, solo responde con el JSON cuando corresponda.`;
 
 function extractFirstJson(str: string) {
   const jsonStart = str.indexOf('{');
@@ -101,7 +78,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const { history } = await request.json();
     const apiKey = import.meta.env.GROQ_API_KEY;
-    const model = "llama3-8b-8192";
+    const model = "llama3-70b-8192";
 
     let messages = history && Array.isArray(history) && history.length > 0
       ? history
@@ -176,7 +153,7 @@ export const POST: APIRoute = async ({ request }) => {
           requestBody: event,
         });
         const htmlLink = gcalRes.data.htmlLink;
-        // Devuelve mensaje de éxito al usuario
+        // Devuelve mensaje de éxito al usuario con el enlace
         return new Response(JSON.stringify({ response: `¡Cita creada con éxito! Puedes verla aquí: <a href="${htmlLink}" target="_blank">Ver en Google Calendar</a>` }), {
           status: 200,
           headers: { 'Content-Type': 'application/json' }
