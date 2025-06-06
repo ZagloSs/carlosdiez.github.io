@@ -37,7 +37,17 @@ Página de contacto:
 
 const contexto = `Carta de presentación:\n${cartaPresentacion}\n\nProyectos disponibles:\n${resumenProyectos()}\n\nExperiencia:\n${experiencia}\n\n${contactoFooter}\n${contactoPagina}`;
 
-const systemPrompt = `Eres un asistente para la web de Carlos Díez. Si el usuario quiere agendar una cita y responde que sí, responde SOLO con el siguiente JSON (sin explicaciones ni texto adicional):
+const systemPrompt = `${contexto}
+
+INSTRUCCIONES PARA AGENDAR CITAS:
+Si el usuario quiere agendar una cita, primero debes pedirle los siguientes datos uno a uno, de forma conversacional y amable:
+- Nombre
+- Email
+- Fecha (AAAA-MM-DD)
+- Hora (HH:MM)
+- Motivo de la cita
+
+Cuando tengas todos los datos, responde SOLO con el siguiente JSON (sin explicaciones ni texto adicional):
 {
   "action": "create_event",
   "data": {
@@ -48,7 +58,7 @@ const systemPrompt = `Eres un asistente para la web de Carlos Díez. Si el usuar
     "motivo": "MOTIVO"
   }
 }
-No expliques nada, solo responde con el JSON cuando corresponda.`;
+No expliques nada, solo responde con el JSON cuando ya tengas todos los datos. Si falta algún dato, pídeselo al usuario.`;
 
 function extractFirstJson(str: string) {
   const jsonStart = str.indexOf('{');
@@ -144,7 +154,7 @@ export const POST: APIRoute = async ({ request }) => {
         const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
         const event = {
           summary: `Cita con ${name}`,
-          description: motivo,
+          description: `${motivo}\nEmail de contacto: ${email}`,
           start: { dateTime: startDateTime.toISOString(), timeZone: 'Europe/Madrid' },
           end: { dateTime: endDateTime.toISOString(), timeZone: 'Europe/Madrid' }
         };
@@ -152,9 +162,8 @@ export const POST: APIRoute = async ({ request }) => {
           calendarId: 'carlosdiezmendez@gmail.com',
           requestBody: event,
         });
-        const htmlLink = gcalRes.data.htmlLink;
-        // Devuelve mensaje de éxito al usuario con el enlace
-        return new Response(JSON.stringify({ response: `¡Cita creada con éxito! Puedes verla aquí: <a href="${htmlLink}" target="_blank">Ver en Google Calendar</a>` }), {
+        // Devuelve mensaje de éxito al usuario sin el enlace
+        return new Response(JSON.stringify({ response: `¡Cita creada con éxito!` }), {
           status: 200,
           headers: { 'Content-Type': 'application/json' }
         });
